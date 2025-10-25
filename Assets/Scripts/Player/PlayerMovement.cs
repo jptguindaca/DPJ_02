@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirection;
     private Rigidbody2D rb;
     private Animator anim;
-    void Awake()
+    void Awake()    
     {
         actions = new Movimento();
         rb = GetComponent<Rigidbody2D>();
@@ -49,11 +50,25 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = actions.Movement.Move.ReadValue<Vector2>().normalized;
 
-        if(moveDirection == Vector2.zero)
+
+
+        if (moveDirection == Vector2.zero)
         {
+
+        
+            anim.SetBool("Moving", false);
+
+
             return;
         }
+        else
+        {
+            anim.SetFloat("MoveX", moveDirection.x);
 
+            anim.SetFloat("MoveY", moveDirection.y);
+
+            anim.SetBool("Moving", true);
+        }
     }
 
     private void Move()
