@@ -3,45 +3,38 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+    [Header("PlayerStats")]
+    [SerializeField] private float playerstats = 10f;
 
-    // Implementou se a interface IDamageable para o PlayerHealth levar dano 
+    private PlayerAnimations playerAnimations;
+
+    void Awake()
+    {
+        playerAnimations = GetComponent<PlayerAnimations>();
+    }
+
     public void TakeDamage(float damage)
     {
-      float currenthealth= playerstats - damage;
+        playerstats -= damage;
 
-        if (currenthealth <= 0)
+        if (playerstats <= 0)
         {
-            playerdead();
+            PlayerDead();
         }
 
         Debug.Log("Player Derrotado");
-
-
     }
 
-    void playerdead()
+    private void PlayerDead()
     {
-        
+        playerAnimations.SetDeadAnimation();
     }
 
-
-    [Header("PlayerStats")]
-
-    [SerializeField] private float playerstats= 10f;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
             TakeDamage(1f);
         }
-
     }
 }

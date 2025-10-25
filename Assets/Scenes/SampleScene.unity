@@ -352,8 +352,10 @@ GameObject:
   - component: {fileID: 1720160136}
   - component: {fileID: 1720160139}
   - component: {fileID: 1720160138}
-  - component: {fileID: 1720160140}
+  - component: {fileID: 1720160142}
   - component: {fileID: 1720160141}
+  - component: {fileID: 1720160143}
+  - component: {fileID: 1720160140}
   m_Layer: 0
   m_Name: PlayerNinja
   m_TagString: Untagged
@@ -509,6 +511,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   playerstats: 100
+--- !u!114 &1720160142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720160135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97759b160f8ba6b41993936d1605117d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimations
+--- !u!114 &1720160143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720160135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f977a24e434e442ba77e70c9db396e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  playerStats: {fileID: 11400000, guid: ced16fcc000d81e4686120ce974b2e6f, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

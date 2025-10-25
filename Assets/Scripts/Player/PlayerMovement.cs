@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -6,39 +5,33 @@ public class PlayerMovement : MonoBehaviour
     [Header("Config")]
     [SerializeField] private float speed;
 
-
     private Movimento actions;
     private Vector2 moveDirection;
     private Rigidbody2D rb;
-    private Animator anim;
-    void Awake()    
+    private PlayerAnimations playerAnimations;
+    private Player player;
+
+    void Awake()
     {
         actions = new Movimento();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        playerAnimations = GetComponent<PlayerAnimations>();
+        player = GetComponent<Player>();
     }
 
-    void Start()
-    {
-
-    }
-    
     void Update()
     {
         ReadMovement();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         Move();
     }
 
-    
     private void OnEnable()
     {
         actions.Enable();
-        
     }
 
     private void OnDisable()
@@ -50,30 +43,25 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = actions.Movement.Move.ReadValue<Vector2>().normalized;
 
-
-
         if (moveDirection == Vector2.zero)
         {
-
-        
-            anim.SetBool("Moving", false);
-
-
+            playerAnimations.SetMoveBoolTransition(false);
             return;
         }
         else
         {
-            anim.SetFloat("MoveX", moveDirection.x);
-
-            anim.SetFloat("MoveY", moveDirection.y);
-
-            anim.SetBool("Moving", true);
+            playerAnimations.SetMoveBoolTransition(true);
+            playerAnimations.SetMoveAnimation(moveDirection);
         }
     }
 
     private void Move()
     {
+        if (player.Stats.PlayerHealth <= 0)
+        {
+            return;
+        }
+
         rb.MovePosition(rb.position + moveDirection * (speed * Time.fixedDeltaTime));
     }
-
 }
